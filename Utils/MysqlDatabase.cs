@@ -9,6 +9,7 @@ namespace aspet.Utils
 
         public MysqlDatabase()
         {
+            Console.WriteLine("Called? But why there is no error?");
             MySqlBaseConnectionStringBuilder connBuilder = connString();
             this.Connection = new MySqlConnection(connBuilder.ConnectionString);
             this.Connection.Open();

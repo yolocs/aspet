@@ -28,7 +28,8 @@ namespace aspet
         public void ConfigureServices(IServiceCollection services)
         {
             // services.AddTransient<MysqlDatabase>(_ => new MysqlDatabase());
-            services.AddSingleton<ITasks, InMemoryTasks>();
+            services.AddSingleton<MysqlDatabase, MysqlDatabase>();
+            services.AddSingleton<ITasks, DatabaseTasks>();
             services.AddControllersWithViews();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();

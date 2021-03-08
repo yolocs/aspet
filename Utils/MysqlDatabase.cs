@@ -9,8 +9,8 @@ namespace aspet.Utils
 
         public MysqlDatabase()
         {
-            Console.WriteLine("Called? But why there is no error?");
             MySqlBaseConnectionStringBuilder connBuilder = connString();
+            Console.WriteLine("CSHOU DEBUG: " + connBuilder.ConnectionString);
             this.Connection = new MySqlConnection(connBuilder.ConnectionString);
             this.Connection.Open();
             this.init();
@@ -46,7 +46,7 @@ namespace aspet.Utils
                 SslMode = MySqlSslMode.None,
                 Server = Environment.GetEnvironmentVariable("INSTANCE_CONNECTION_NAME"),
                 UserID = Environment.GetEnvironmentVariable("DB_USER"),
-                Password = Environment.GetEnvironmentVariable("DB_PASS"),
+                Password = Environment.GetEnvironmentVariable("DB_PASSWORD"),
                 Database = Environment.GetEnvironmentVariable("DB_NAME"),
                 ConnectionProtocol = MySqlConnectionProtocol.UnixSocket
             };

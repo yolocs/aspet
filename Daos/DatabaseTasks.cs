@@ -67,19 +67,21 @@ namespace aspet.Daos
             using (var cmd = this.database.Connection.CreateCommand() as MySqlCommand)
             {
                 cmd.CommandText = @"SELECT TaskId, Email, Text, Completed FROM Tasks WHERE Archived IS NULL";
-                var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                using (var reader = cmd.ExecuteReader())
                 {
-                    var t = new dto.Task()
+                    while (reader.Read())
                     {
-                        TaskId = reader.GetFieldValue<int>(0),
-                        Email = reader.GetFieldValue<string>(1),
-                        Text = reader.GetFieldValue<string>(2)
-                    };
-                    if (!reader.IsDBNull(3))
-                        t.Completed = reader.GetFieldValue<DateTime>(3);
+                        var t = new dto.Task()
+                        {
+                            TaskId = reader.GetFieldValue<int>(0),
+                            Email = reader.GetFieldValue<string>(1),
+                            Text = reader.GetFieldValue<string>(2)
+                        };
+                        if (!reader.IsDBNull(3))
+                            t.Completed = reader.GetFieldValue<DateTime>(3);
 
-                    ret.Add(t);
+                        ret.Add(t);
+                    }
                 }
             }
 
